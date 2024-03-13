@@ -18,6 +18,7 @@
 #define VECTOR_TEMPLATE_LIBRARY__H
 /* Deps */
 #include <stdint.h>
+#include <stdarg.h>
 
 /* Structures */
 template <typename T>
@@ -186,7 +187,7 @@ struct Vector4D
 	};
 };
 
-template <typename T>
+template <uint64_t N, typename T>
 struct Vector
 {
 	/*
@@ -194,9 +195,45 @@ struct Vector
 	*/
 
 	/* Elements */
-	// @todo
+	T value[N];
 
 	/* Methods */
-	// @todo
+	
+	// Constructors & Destructor
+	Vector()
+	{
+		for (uint64_t i = 0; i < N; i++)
+		{
+			this->value[i] = T();
+		};
+	};
+	Vector(const T v...)
+	{
+		va_list args;
+		va_start(args, v);
+		this->value[0] = v;
+		for (uint64_t i = 1; i < N; i++)
+		{
+			this->value[i] = va_arg(args, T);
+		};
+		va_end(args);
+	};
+	Vector(const Vector<N, T>& source)
+	{
+		for (uint64_t i = 0; i < N; i++)
+		{
+			this->value[i] = source[i];
+		};
+	};
+
+	// Access Operators
+	inline T& operator[](const uint64_t& i)
+	{
+		return this->value[i];
+	};
+	inline T& get(const uint64_t& i)
+	{
+		return (*this)[i];
+	};
 };
 #endif
