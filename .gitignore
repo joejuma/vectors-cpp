@@ -1,0 +1,14 @@
+# Visual Studio Directories
+.vs/
+x64/
+x86/
+Debug/
+Release/
+
+# Visual Studio Files
+*.sln
+*.vcxproj
+*.vcxproj.*
+
+# Development Files
+main.cpp
