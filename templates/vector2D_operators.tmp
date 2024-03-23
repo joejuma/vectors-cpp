@@ -1,0 +1,173 @@
+// Binary Operators
+inline Vector2D<T> operator$${OP_1}$$(const Vector2D<T>& B)
+{
+	return Vector2D<T>(
+		(this->x() $${OP_1}$$ B.x()),
+		(this->y() $${OP_1}$$ B.y())
+	);
+};
+inline Vector2D<T> operator$${OP_1}$$(const T& B)
+{
+	return Vector2D<T>(
+		(this->x() $${OP_1}$$ B),
+		(this->y() $${OP_1}$$ B)
+	);
+};
+
+inline Vector2D<T> operator$${OP_2}$$(const Vector2D<T>& B)
+{
+	return Vector2D<T>(
+		(this->x() $${OP_2}$$ B.x()),
+		(this->y() $${OP_2}$$ B.y())
+	);
+};
+inline Vector2D<T> operator$${OP_2}$$(const T& B)
+{
+	return Vector2D<T>(
+		(this->x() $${OP_2}$$ B),
+		(this->y() $${OP_2}$$ B)
+	);
+};
+
+inline Vector2D<T> operator$${OP_3}$$(const Vector2D<T>& B)
+{
+	return Vector2D<T>(
+		(this->x() $${OP_3}$$ B.x()),
+		(this->y() $${OP_3}$$ B.y())
+	);
+};
+inline Vector2D<T> operator$${OP_3}$$(const T& B)
+{
+	return Vector2D<T>(
+		(this->x() $${OP_3}$$ B),
+		(this->y() $${OP_3}$$ B)
+	);
+};
+
+inline Vector2D<T> operator$${OP_4}$$(const Vector2D<T>& B)
+{
+	return Vector2D<T>(
+		(this->x() $${OP_4}$$ B.x()),
+		(this->y() $${OP_4}$$ B.y())
+	);
+};
+inline Vector2D<T> operator$${OP_4}$$(const T& B)
+{
+	return Vector2D<T>(
+		(this->x() $${OP_4}$$ B),
+		(this->y() $${OP_4}$$ B)
+	);
+};
+
+inline Vector2D<T> operator$${OP_1}$$(const Vector2D<T>& B)
+{
+	return Vector2D<T>(
+		(this->x() $${OP_1}$$ B.x()),
+		(this->y() $${OP_1}$$ B.y())
+	);
+};
+inline Vector2D<T> operator$${OP_1}$$(const T& B)
+{
+	return Vector2D<T>(
+		(this->x() $${OP_1}$$ B),
+		(this->y() $${OP_1}$$ B)
+	);
+};
+
+inline Vector2D<T> operator$${OP_2}$$(const Vector2D<T>& B)
+{
+	return Vector2D<T>(
+		(this->x() $${OP_2}$$ B.x()),
+		(this->y() $${OP_2}$$ B.y())
+	);
+};
+inline Vector2D<T> operator$${OP_2}$$(const T& B)
+{
+	return Vector2D<T>(
+		(this->x() $${OP_2}$$ B),
+		(this->y() $${OP_2}$$ B)
+	);
+};
+
+inline Vector2D<T> operator$${OP_3}$$(const Vector2D<T>& B)
+{
+	return Vector2D<T>(
+		(this->x() $${OP_3}$$ B.x()),
+		(this->y() $${OP_3}$$ B.y())
+	);
+};
+inline Vector2D<T> operator$${OP_3}$$(const T& B)
+{
+	return Vector2D<T>(
+		(this->x() $${OP_3}$$ B),
+		(this->y() $${OP_3}$$ B)
+	);
+};
+
+inline Vector2D<T> operator$${OP_4}$$(const Vector2D<T>& B)
+{
+	return Vector2D<T>(
+		(this->x() $${OP_4}$$ B.x()),
+		(this->y() $${OP_4}$$ B.y())
+	);
+};
+inline Vector2D<T> operator$${OP_4}$$(const T& B)
+{
+	return Vector2D<T>(
+		(this->x() $${OP_4}$$ B),
+		(this->y() $${OP_4}$$ B)
+	);
+};
+
+// Binary Assignment Operators
+inline Vector2D<T>& operator$${OP_1}$$=(const Vector2D<T>& B)
+{
+	this->x() = this->x() $${OP_1}$$ B.x();
+	this->y() = this->y() $${OP_1}$$ B.y();
+	return (*this);
+};
+inline Vector2D<T> operator$${OP_1}$$=(const T& B)
+{
+	this->x() = this->x() $${OP_1}$$ B;
+	this->y() = this->y() $${OP_1}$$ B;
+	return (*this);
+};
+
+inline Vector2D<T>& operator$${OP_2}$$=(const Vector2D<T>& B)
+{
+	this->x() = this->x() $${OP_2}$$ B.x();
+	this->y() = this->y() $${OP_2}$$ B.y();
+	return (*this);
+};
+inline Vector2D<T> operator$${OP_2}$$=(const T& B)
+{
+	this->x() = this->x() $${OP_2}$$ B;
+	this->y() = this->y() $${OP_2}$$ B;
+	return (*this);
+};
+
+inline Vector2D<T>& operator$${OP_3}$$=(const Vector2D<T>& B)
+{
+	this->x() = this->x() $${OP_3}$$ B.x();
+	this->y() = this->y() $${OP_3}$$ B.y();
+	return (*this);
+};
+inline Vector2D<T> operator$${OP_3}$$=(const T& B)
+{
+	this->x() = this->x() $${OP_3}$$ B;
+	this->y() = this->y() $${OP_3}$$ B;
+	return (*this);
+};
+
+inline Vector2D<T>& operator$${OP_4}$$=(const Vector2D<T>& B)
+{
+	this->x() = this->x() $${OP_4}$$ B.x();
+	this->y() = this->y() $${OP_4}$$ B.y();
+	return (*this);
+};
+inline Vector2D<T> operator$${OP_4}$$=(const T& B)
+{
+	this->x() = this->x() $${OP_4}$$ B;
+	this->y() = this->y() $${OP_4}$$ B;
+	return (*this);
+}; 
