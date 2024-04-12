@@ -19,6 +19,8 @@
 /* Deps */
 #include <stdint.h>
 #include <stdarg.h>
+#include <string>
+#include <iostream>
 
 /* Structures */
 template <typename T>
@@ -66,6 +68,12 @@ struct Vector2D
 	inline T& get(const uint64_t& i)
 	{
 		return (*this)[i];
+	};
+
+	// Serialization
+	virtual inline std::string toString() const
+	{
+		return "(" + std::to_string(this->value[0]) + "," + std::to_string(this->value[1]) + ")";
 	};
 
 	// Magnitude Operators
@@ -148,7 +156,7 @@ struct Vector2D
 		this->y() = this->y() + B.y();
 		return (*this);
 	};
-	inline Vector2D<T> operator+=(const T& B)
+	inline Vector2D<T>& operator+=(const T& B)
 	{
 		this->x() = this->x() + B;
 		this->y() = this->y() + B;
@@ -161,7 +169,7 @@ struct Vector2D
 		this->y() = this->y() - B.y();
 		return (*this);
 	};
-	inline Vector2D<T> operator-=(const T& B)
+	inline Vector2D<T>& operator-=(const T& B)
 	{
 		this->x() = this->x() - B;
 		this->y() = this->y() - B;
@@ -174,7 +182,7 @@ struct Vector2D
 		this->y() = this->y() * B.y();
 		return (*this);
 	};
-	inline Vector2D<T> operator*=(const T& B)
+	inline Vector2D<T>& operator*=(const T& B)
 	{
 		this->x() = this->x() * B;
 		this->y() = this->y() * B;
@@ -187,7 +195,7 @@ struct Vector2D
 		this->y() = this->y() / B.y();
 		return (*this);
 	};
-	inline Vector2D<T> operator/=(const T& B)
+	inline Vector2D<T>& operator/=(const T& B)
 	{
 		this->x() = this->x() / B;
 		this->y() = this->y() / B;
@@ -225,6 +233,16 @@ struct Vector3D
 		this->value[0] = source.value[0];
 		this->value[1] = source.value[1];
 		this->value[2] = source.value[2];
+	};
+
+	// Serialization
+	virtual inline std::string toString() const
+	{
+		return "(" +
+			std::to_string(this->value[0]) +
+			"," + std::to_string(this->value[1]) +
+			"," + std::to_string(this->value[2]) +
+		")";
 	};
 
 	// Magnitude Operators
@@ -465,6 +483,17 @@ struct Vector4D
 		return (*this)[i];
 	};
 
+	// Serialization
+	virtual inline std::string toString() const
+	{
+		return "(" + 
+			std::to_string(this->value[0]) + 
+			"," + std::to_string(this->value[1]) + 
+			"," + std::to_string(this->value[2]) + 
+			"," + std::to_string(this->value[3]) + 
+		")";
+	};
+
 	// Magnitude Operators
 	inline T magnitude()
 	{
@@ -678,6 +707,22 @@ struct Vector
 		return (*this)[i];
 	};
 
+	// Serialization
+	virtual inline std::string toString() const
+	{
+		std::string s = "(";
+		for (uint64_t i = 0; i < N; i++)
+		{
+			s += std::to_string(this->value[i]);
+			if ((i + 1) < N)
+			{
+				s += ",";
+			};
+		};
+		s += ")";
+		return s;
+	};
+
 	// Magnitude Operators
 	inline T magnitude()
 	{
@@ -702,4 +747,27 @@ struct Vector
 		return value;
 	};
 };
+
+/* Pipe Operators */
+template <typename T>
+std::ostream& operator<<(const std::ostream& stream, const Vector2D<T>& value)
+{
+	return stream << value.toString();
+};
+template <typename T>
+std::ostream& operator<<(const std::ostream& stream, const Vector3D<T>& value)
+{
+	return stream << value.toString();
+};
+template <typename T>
+std::ostream& operator<<(const std::ostream& stream, const Vector4D<T>& value)
+{
+	return stream << value.toString();
+};
+template <uint64_t N, typename T>
+std::ostream& operator<<(const std::ostream& stream, const Vector<N,T>& value)
+{
+	return stream << value.toString();
+};
+
 #endif
