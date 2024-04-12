@@ -12,3 +12,6 @@ Release/
 
 # Development Files
 main.cpp
+
+# Template Directories
+templates/
