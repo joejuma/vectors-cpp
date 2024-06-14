@@ -668,12 +668,6 @@ struct Vector4D
 		")";
 	};
 
-	// Magnitude Operators
-	inline T magnitude()
-	{
-		return sqrt(pow((double)this->x(), 2.0) + pow((double)this->y(), 2.0) + pow((double)this->z(), 2.0) + pow((double)this->w(), 2.0));
-	};
-
 	// Product Operators
 	inline T dot(const Vector4D<T>& B)
 	{
