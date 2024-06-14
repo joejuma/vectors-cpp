@@ -77,11 +77,60 @@ struct Vector2D
 	};
 
 	// Magnitude Operators
-	inline T magnitude()
+	inline T length()
 	{
 		return sqrt(pow((double)this->x(),2.0) + pow((double)this->y(), 2.0));
 	};
+	inline T sum() const
+	{
+		return (
+			abs(this->value[0]) + 
+			abs(this->value[1])
+		);
+	};
 	
+	// Normalization Methods
+	inline T norm()
+	{
+		return sqrt(
+			pow((double)this->x(), 2.0) +
+			pow((double)this->y(), 2.0)
+		);
+	};
+	inline T pNorm(const uint64_t& p)
+	{
+		/*
+			A lebesgue p-Norm, where the exponent (2) in the norm formula is generalized
+			into a variable p. Thanks again Henri!
+		*/
+
+		return pow(
+			(
+				pow((double)this->x(), (double)p) +
+				pow((double)this->y(), (double)p)
+			),
+			(1.0 / p)
+		);
+	};
+	
+	inline Vector2D<T> unitNormal()
+	{
+		return ((*this) / this->norm());
+	};
+	inline Vector2D<T> normal() const
+	{
+		/*
+			Returns the normal vector, calculated from dividing each element by the sum 
+			of all the elements.
+		*/
+
+		T _sum = this->sum();
+		return Vector2D<T>(
+			((double)this->value[0] / _sum),
+			((double)this->value[1] / _sum)
+		);
+	};
+
 	// Product Operators
 	inline T dot(const Vector2D<T>& B)
 	{
@@ -246,9 +295,66 @@ struct Vector3D
 	};
 
 	// Magnitude Operators
-	inline T magnitude()
+	inline T length()
 	{
-		return sqrt(pow((double)this->x(), 2.0) + pow((double)this->y(), 2.0) + pow((double)this->z(), 2.0));
+		return sqrt(
+			pow((double)this->value[0], 2.0) +
+			pow((double)this->value[1], 2.0) +
+			pow((double)this->value[2], 2.0)
+		);
+	};
+	inline T sum() const
+	{
+		return (
+			abs(this->value[0]) + 
+			abs(this->value[1]) + 
+			abs(this->value[2])
+		);
+	};
+
+	// Normalization Methods
+	inline T norm()
+	{
+		return sqrt(
+			pow((double)this->value[0], 2.0) +
+			pow((double)this->value[1], 2.0) +
+			pow((double)this->value[2], 2.0)
+		);
+	};
+	inline T pNorm(const uint64_t& p)
+	{
+		/*
+			A lebesgue p-Norm, where the exponent (2) in the norm formula is generalized
+			into a variable p. Thanks again Henri!
+		*/
+
+		return pow(
+			(
+				pow((double)this->value[0], (double)p) +
+				pow((double)this->value[1], (double)p) +
+				pow((double)this->value[2], (double)p)
+			),
+			(1.0 / p)
+		);
+	};
+
+	inline Vector3D<T> unitNormal()
+	{
+		return ((*this) / this->norm());
+	};
+	inline Vector3D<T> normal() const
+	{
+		/*
+			Returns the normal vector, calculated from dividing each element by the sum
+			of all the elements.
+		*/
+
+		T _sum = this->sum();
+		return Vector3D<T>(
+			((double)this->value[0] / _sum),
+			((double)this->value[1] / _sum),
+			((double)this->value[2] / _sum)
+		);
 	};
 
 	// Access Operators
@@ -455,6 +561,74 @@ struct Vector4D
 		this->value[1] = source.value[1];
 		this->value[2] = source.value[2];
 		this->value[3] = source.value[3];
+	};
+
+	// Magnitude Operators
+	inline T length()
+	{
+		return sqrt(
+			pow((double)this->value[0], 2.0) +
+			pow((double)this->value[1], 2.0) +
+			pow((double)this->value[2], 2.0) +
+			pow((double)this->value[3], 2.0)
+		);
+	};
+	inline T sum() const
+	{
+		return (
+			abs(this->value[0]) + 
+			abs(this->value[1]) + 
+			abs(this->value[2]) + 
+			abs(this->value[3])
+		);
+	};
+
+	// Normalization Methods
+	inline T norm()
+	{
+		return sqrt(
+			pow((double)this->value[0], 2.0) +
+			pow((double)this->value[1], 2.0) +
+			pow((double)this->value[2], 2.0) +
+			pow((double)this->value[3], 2.0)
+		);
+	};
+	inline T pNorm(const uint64_t& p)
+	{
+		/*
+			A lebesgue p-Norm, where the exponent (2) in the norm formula is generalized
+			into a variable p. Thanks again Henri!
+		*/
+
+		return pow(
+			(
+				pow((double)this->value[0], (double)p) +
+				pow((double)this->value[1], (double)p) +
+				pow((double)this->value[2], (double)p) +
+				pow((double)this->value[3], (double)p)
+			),
+			(1.0 / p)
+		);
+	};
+
+	inline Vector4D<T> unitNormal()
+	{
+		return ((*this) / this->norm());
+	};
+	inline Vector4D<T> normal() const
+	{
+		/*
+			Returns the normal vector, calculated from dividing each element by the sum
+			of all the elements.
+		*/
+
+		T _sum = this->sum();
+		return Vector4D<T>(
+			((double)this->value[0] / _sum),
+			((double)this->value[1] / _sum),
+			((double)this->value[2] / _sum),
+			((double)this->value[3] / _sum)
+		);
 	};
 
 	// Access Operators
@@ -724,7 +898,7 @@ struct Vector
 	};
 
 	// Magnitude Operators
-	inline T magnitude()
+	inline T length()
 	{
 		T sum = T();
 		for (uint64_t i = 0; i < N; i++)
@@ -733,6 +907,55 @@ struct Vector
 		};
 
 		return sqrt(sum);
+	};
+	inline T sum()
+	{
+		T sum = T();
+		for (uint64_t i = 0; i < N; i++)
+		{
+			sum += abs(this->value[i]);
+		};
+
+		return sum;
+	};
+
+	// Normalization Methods
+	inline T norm() const
+	{
+		T sum = T();
+		for (uint64_t i = 0; i < N; i++)
+		{
+			sum += pow((double)this->value[i], 2.0);
+		};
+
+		return sqrt(sum);
+	};
+	inline T pNorm(const uint64_t& p) const
+	{
+		T sum = T();
+		for (uint64_t i = 0; i < N; i++)
+		{
+			sum += pow((double)this->value[i], (double)p);
+		};
+
+		return pow(sum, (1.0/(double)p));
+	};
+	
+	inline Vector<N, T> unitNormal()
+	{
+		return ((*this) / this->norm());
+	};
+	inline Vector<N, T> normal() const
+	{
+		T _sum = this->sum();
+		Vector<N, T> v;
+
+		for (uint64_t i = 0; i < N; i++)
+		{
+			v.get(i) = (this->get(i) / _sum);
+		};
+
+		return v;
 	};
 
 	// Product Operators
@@ -750,22 +973,22 @@ struct Vector
 
 /* Pipe Operators */
 template <typename T>
-std::ostream& operator<<(const std::ostream& stream, const Vector2D<T>& value)
+std::ostream& operator<<(std::ostream& stream, const Vector2D<T>& value)
 {
 	return stream << value.toString();
 };
 template <typename T>
-std::ostream& operator<<(const std::ostream& stream, const Vector3D<T>& value)
+std::ostream& operator<<(std::ostream& stream, const Vector3D<T>& value)
 {
 	return stream << value.toString();
 };
 template <typename T>
-std::ostream& operator<<(const std::ostream& stream, const Vector4D<T>& value)
+std::ostream& operator<<(std::ostream& stream, const Vector4D<T>& value)
 {
 	return stream << value.toString();
 };
 template <uint64_t N, typename T>
-std::ostream& operator<<(const std::ostream& stream, const Vector<N,T>& value)
+std::ostream& operator<<(std::ostream& stream, const Vector<N,T>& value)
 {
 	return stream << value.toString();
 };
