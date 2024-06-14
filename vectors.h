@@ -90,11 +90,11 @@ struct Vector2D
 	};
 	
 	// Normalization Methods
-	inline T norm()
+	inline T norm() const
 	{
 		return sqrt(
-			pow((double)this->x(), 2.0) +
-			pow((double)this->y(), 2.0)
+			pow((double)this->value[0], 2.0) +
+			pow((double)this->value[1], 2.0)
 		);
 	};
 	inline T pNorm(const uint64_t& p)
@@ -132,9 +132,22 @@ struct Vector2D
 	};
 
 	// Product Operators
-	inline T dot(const Vector2D<T>& B)
+	inline T dot(const Vector2D<T>& B) const
 	{
-		return ((this->x() * B.x()) + (this->y() * B.y()));
+		return (
+			(this->value[0] * B.value[0]) + 
+			(this->value[1] * B.value[1])
+		);
+	};
+
+	// Projection Operators
+	inline T scalarProjection(Vector2D<T>& B) const
+	{
+		/*
+			Performs a scalar vector projection of this vector onto the given
+			vector (B).
+		*/
+		return (*this).dot(B / B.norm());
 	};
 
 	// Binary Operators
@@ -313,7 +326,7 @@ struct Vector3D
 	};
 
 	// Normalization Methods
-	inline T norm()
+	inline T norm() const
 	{
 		return sqrt(
 			pow((double)this->value[0], 2.0) +
@@ -380,21 +393,31 @@ struct Vector3D
 	};
 
 	// Product Operators
-	inline T dot(const Vector3D<T>& B)
+	inline T dot(const Vector3D<T>& B) const
 	{
 		return (
-			(this->x() * B.x()) + 
-			(this->y() * B.y()) + 
-			(this->z() * B.z())
+			(this->value[0] * B.value[0]) + 
+			(this->value[1] * B.value[1]) + 
+			(this->value[2] * B.value[2])
 		);
 	};
-	inline Vector3D<T> cross(const Vector3D<T>& B)
+	inline Vector3D<T> cross(const Vector3D<T>& B) const
 	{
 		return Vector3D<T>(
-			(this->y() * B.z()) - (this->z() * B.y()),
-			(this->z() * B.x()) - (this->x() * B.z()),
-			(this->x() * B.y()) - (this->y() * B.x())
+			(this->value[1] * B.value[2]) - (this->value[2] * B.value[1]),
+			(this->value[2] * B.value[0]) - (this->value[0] * B.value[2]),
+			(this->value[0] * B.value[1]) - (this->value[1] * B.value[0])
 		);
+	};
+
+	// Projection Operators
+	inline T scalarProjection(Vector3D<T>& B) const
+	{
+		/*
+			Performs a scalar vector projection of this vector onto the given
+			vector (B).
+		*/
+		return (*this).dot(B / B.norm());
 	};
 
 	// Binary Operators
@@ -584,7 +607,7 @@ struct Vector4D
 	};
 
 	// Normalization Methods
-	inline T norm()
+	inline T norm() const
 	{
 		return sqrt(
 			pow((double)this->value[0], 2.0) +
@@ -593,7 +616,7 @@ struct Vector4D
 			pow((double)this->value[3], 2.0)
 		);
 	};
-	inline T pNorm(const uint64_t& p)
+	inline T pNorm(const uint64_t& p) const
 	{
 		/*
 			A lebesgue p-Norm, where the exponent (2) in the norm formula is generalized
@@ -669,14 +692,24 @@ struct Vector4D
 	};
 
 	// Product Operators
-	inline T dot(const Vector4D<T>& B)
+	inline T dot(const Vector4D<T>& B) const
 	{
 		return (
-			(this->x() * B.x()) +
-			(this->y() * B.y()) +
-			(this->z() * B.z()) +
-			(this->t() * B.t())
+			(this->value[0] * B.value[0]) +
+			(this->value[1] * B.value[1]) +
+			(this->value[2] * B.value[2]) +
+			(this->value[3] * B.value[3])
 		);
+	};
+
+	// Projection Operators
+	inline T scalarProjection(Vector4D<T>& B) const
+	{
+		/*
+			Performs a scalar vector projection of this vector onto the given
+			vector (B).
+		*/
+		return (*this).dot(B / B.norm());
 	};
 
 	// Binary Operators
@@ -861,7 +894,7 @@ struct Vector
 	{
 		for (uint64_t i = 0; i < N; i++)
 		{
-			this->value[i] = source[i];
+			this->value[i] = source.value[i];
 		};
 	};
 
@@ -953,16 +986,19 @@ struct Vector
 	};
 
 	// Product Operators
-	inline T dot(const Vector<N, T>& B)
+	inline T dot(const Vector<N, T>& B) const
 	{
 		T value = T();
 		for (uint64_t i = 0; i < N; i++)
 		{
-			value += (this->get(i) * ((Vector<N,T>&)B).get(i));
+			value += (this->value[i] * ((Vector<N,T>&)B).value[i]);
 		};
 
 		return value;
 	};
+
+	// Vector Projection Methods
+	// @placeholder: scalarProjection
 };
 
 /* Pipe Operators */
