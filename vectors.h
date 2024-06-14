@@ -147,7 +147,7 @@ struct Vector2D
 			Performs a scalar vector projection of this vector onto the given
 			vector (B).
 		*/
-		return (*this).dot(B / B.norm());
+		return (*this).dot(B.unitNormal());
 	};
 
 	// Binary Operators
@@ -417,7 +417,7 @@ struct Vector3D
 			Performs a scalar vector projection of this vector onto the given
 			vector (B).
 		*/
-		return (*this).dot(B / B.norm());
+		return (*this).dot(B.unitNormal());
 	};
 
 	// Binary Operators
@@ -709,7 +709,7 @@ struct Vector4D
 			Performs a scalar vector projection of this vector onto the given
 			vector (B).
 		*/
-		return (*this).dot(B / B.norm());
+		return (*this).dot(B.unitNormal());
 	};
 
 	// Binary Operators
@@ -970,6 +970,7 @@ struct Vector
 	
 	inline Vector<N, T> unitNormal()
 	{
+		// @todo: Compiler error arises here - because the binary operators aren't defined.
 		return ((*this) / this->norm());
 	};
 	inline Vector<N, T> normal() const
@@ -998,7 +999,10 @@ struct Vector
 	};
 
 	// Vector Projection Methods
-	// @placeholder: scalarProjection
+	inline T scalarProjection(Vector<N, T>& B) const
+	{
+		return (*this).dot(B.unitNormal());
+	};
 };
 
 /* Pipe Operators */
